@@ -1,6 +1,8 @@
 package com.lele.tank;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -23,6 +25,9 @@ public class TankFrame extends Frame {
         // 显示窗口
         setVisible(true);
 
+        // 窗口事件监听
+        this.addKeyListener(new MyKeyListener());
+
         // 添加Window的监听器
         addWindowListener(new WindowAdapter() {
 
@@ -40,5 +45,29 @@ public class TankFrame extends Frame {
         g.fillRect(x, y, 50, 50);
         x += 10;
         y += 10;
+    }
+
+    /**
+     * 键盘监听处理类
+     */
+    class MyKeyListener extends KeyAdapter {
+
+        /**
+         * 键 被按下去的时候，调用该方法
+         * @param e
+         */
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("key pressed");
+        }
+
+        /**
+         * 键 被弹起来的时候调用该方法
+         * @param e
+         */
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("key released");
+        }
     }
 }

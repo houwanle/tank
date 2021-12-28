@@ -11,6 +11,8 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    int x = 200, y = 200;
+
     public TankFrame(){
         // 设置窗口大小
         setSize(800, 600); // 像素
@@ -35,6 +37,8 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         // 填充一个矩形
-        g.fillRect(200, 200, 50, 50);
+        g.fillRect(x, y, 50, 50);
+        x += 10;
+        y += 10;
     }
 }

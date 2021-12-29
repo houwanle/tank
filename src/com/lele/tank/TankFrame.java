@@ -44,7 +44,7 @@ public class TankFrame extends Frame {
         // 填充一个矩形
         g.fillRect(x, y, 50, 50);
         x += 10;
-        y += 10;
+//        y += 10;
     }
 
     /**
@@ -58,7 +58,8 @@ public class TankFrame extends Frame {
          */
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("key pressed");
+//             x += 200;
+//             repaint();// 会默认调用paint()
         }
 
         /**

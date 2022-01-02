@@ -9,15 +9,19 @@ import java.awt.*;
  */
 public class Bullet {
 
-    private static final int SPEED = 1; // 子弹的速度
+    private static final int SPEED = 10; // 子弹的速度
+    private static int WIDTH = 30, HEIGHT = 30; // 子弹的大小
     private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向
-    private static int WIDTH = 30, HEIGHT = 30; // 子弹的大小
+    private boolean live = true; // 子弹是否有效
+    private TankFrame tf = null;
 
-    public Bullet(int x, int y, Dir dir) {
+
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     /**
@@ -25,6 +29,9 @@ public class Bullet {
      * @param g
      */
     public void paint(Graphics g) {
+        if (!live) {
+            tf.bullets.remove(this);
+        }
         Color c = g.getColor(); // 获取原来的颜色
         g.setColor(Color.RED); // 设置子弹的颜色
         g.fillOval(x, y, WIDTH, HEIGHT);
@@ -51,5 +58,11 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+
+        // 子弹飞出游戏窗口后，子弹无效
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
+            live = false;
+        }
+
     }
 }

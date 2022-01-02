@@ -5,6 +5,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author: lele
@@ -17,7 +20,8 @@ public class TankFrame extends Frame {
     static final int GAME_HEIGHT = 600; // 游戏窗口高度
 
     Tank myTank = new Tank(200, 200, Dir.DOWN, this);
-    Bullet b = new Bullet(300, 300,Dir.DOWN);
+    List<Bullet> bullets = new ArrayList<>();
+    Bullet b = new Bullet(300, 300, Dir.DOWN, this);
 
     public TankFrame(){
         // 设置窗口大小
@@ -65,10 +69,22 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量" + bullets.size(), 10, 60);
+        g.setColor(c);
+
         // 画坦克
         myTank.paint(g);
+
         // 画子弹
-        b.paint(g);
+//        for (Bullet b : bullets) { //用此种方法画子弹，在删除子弹的时候会报java.util.ConcurrentModificationException错
+//            b.paint(g);
+//        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
+
     }
 
     /**

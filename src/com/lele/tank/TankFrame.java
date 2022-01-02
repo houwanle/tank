@@ -13,12 +13,15 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
+    static final int GAME_WIDTH = 800; //游戏窗口宽度
+    static final int GAME_HEIGHT = 600; // 游戏窗口高度
+
     Tank myTank = new Tank(200, 200, Dir.DOWN);
     Bullet b = new Bullet(300, 300,Dir.DOWN);
 
     public TankFrame(){
         // 设置窗口大小
-        setSize(800, 600); // 像素
+        setSize(GAME_WIDTH, GAME_HEIGHT); // 像素
         // 设置窗口是否可以改变大小
         setResizable(false);
         // 设置窗口的标题
@@ -38,6 +41,26 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+
+    Image offScreenImage = null;
+
+    /**
+     * 用双缓冲解决闪烁问题
+     * @param g
+     */
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0,0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage,0,0,null);
     }
 
     @Override

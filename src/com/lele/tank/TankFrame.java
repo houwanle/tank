@@ -16,7 +16,7 @@ public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800; //游戏窗口宽度
     static final int GAME_HEIGHT = 600; // 游戏窗口高度
 
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
     Bullet b = new Bullet(300, 300,Dir.DOWN);
 
     public TankFrame(){
@@ -130,6 +130,9 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_DOWN: // 向下按键
                     bD = false;
+                    break;
+                case KeyEvent.VK_CONTROL: // Ctrl键
+                    myTank.fire(); // 打出一颗子弹
                     break;
                 default:
                     break;

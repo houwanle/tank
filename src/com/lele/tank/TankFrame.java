@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Bullet b = new Bullet(300, 300,Dir.DOWN);
 
     public TankFrame(){
         // 设置窗口大小
@@ -43,7 +44,8 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         // 画坦克
         myTank.paint(g);
-
+        // 画子弹
+        b.paint(g);
     }
 
     /**

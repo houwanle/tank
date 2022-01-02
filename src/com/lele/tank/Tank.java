@@ -11,7 +11,7 @@ public class Tank {
 
     private int x, y; // 坦克的大小
     private Dir dir = Dir.DOWN; // 坦克的方向
-    private static final int SPEED = 10; // 坦克的速度
+    private static final int SPEED = 5; // 坦克的速度
     private boolean moving = false;  // 坦克是否在移动
 
     public boolean isMoving() {

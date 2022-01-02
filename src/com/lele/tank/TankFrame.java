@@ -86,30 +86,11 @@ public class TankFrame extends Frame {
         }
 
         /**
-         * 设置主战坦克的方向
-         */
-        private void setMainTankDir() {
-            if (bL) {
-                myTank.setDir(Dir.LEFT);
-            }
-            if (bU) {
-                myTank.setDir(Dir.UP);
-            }
-            if (bR) {
-                myTank.setDir(Dir.RIGHT);
-            }
-            if (bD) {
-                myTank.setDir(Dir.DOWN);
-            }
-        }
-
-        /**
          * 键 被弹起来的时候调用该方法
          * @param e
          */
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
             // 获取按键代码
             int key = e.getKeyCode();
             switch(key) {
@@ -131,6 +112,30 @@ public class TankFrame extends Frame {
 
             // 设置主战坦克的方向
             setMainTankDir();
+        }
+
+        /**
+         * 设置主战坦克的方向
+         */
+        private void setMainTankDir() {
+            if (!bL && !bU && !bR && !bD) {
+                myTank.setMoving(false);
+            } else {
+                myTank.setMoving(true); //坦克开始移动
+
+                if (bL) {
+                    myTank.setDir(Dir.LEFT);
+                }
+                if (bU) {
+                    myTank.setDir(Dir.UP);
+                }
+                if (bR) {
+                    myTank.setDir(Dir.RIGHT);
+                }
+                if (bD) {
+                    myTank.setDir(Dir.DOWN);
+                }
+            }
         }
     }
 }

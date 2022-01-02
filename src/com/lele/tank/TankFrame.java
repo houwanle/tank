@@ -13,9 +13,7 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    int x = 200, y = 200;
-    Dir dir = Dir.DOWN;
-    private static final int SPEED = 10; //坦克的速度
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
 
     public TankFrame(){
         // 设置窗口大小
@@ -43,25 +41,9 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        // 填充一个矩形
-        g.fillRect(x, y, 50, 50);
+        // 画坦克
+        myTank.paint(g);
 
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-        }
-//        x += 10;
-//        y += 10;
     }
 
     /**
@@ -108,16 +90,16 @@ public class TankFrame extends Frame {
          */
         private void setMainTankDir() {
             if (bL) {
-                dir = Dir.LEFT;
+                myTank.setDir(Dir.LEFT);
             }
             if (bU) {
-                dir = Dir.UP;
+                myTank.setDir(Dir.UP);
             }
             if (bR) {
-                dir = Dir.RIGHT;
+                myTank.setDir(Dir.RIGHT);
             }
             if (bD) {
-                dir = Dir.DOWN;
+                myTank.setDir(Dir.DOWN);
             }
         }
 

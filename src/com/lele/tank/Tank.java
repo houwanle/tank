@@ -12,7 +12,12 @@ public class Tank {
     private int x, y; // 坦克的大小
     private Dir dir = Dir.DOWN; // 坦克的方向
     private static final int SPEED = 5; // 坦克的速度
+
+    public static int WIDTH = ResourceMgr.tankD.getWidth(); // 坦克的宽度
+    public static int HEIGHT = ResourceMgr.tankD.getHeight();// 坦克的高度
+
     private boolean moving = false;  // 坦克是否在移动
+
     private TankFrame tf = null;
 
     public boolean isMoving() {
@@ -90,6 +95,10 @@ public class Tank {
      * 发射子弹
      */
     public void fire() {
-        tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
+        // 让子弹从坦克中心发射
+        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
     }
 }

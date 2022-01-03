@@ -10,12 +10,14 @@ import java.awt.*;
 public class Bullet {
 
     private static final int SPEED = 10; // 子弹的速度
-    private static int WIDTH = 30, HEIGHT = 30; // 子弹的大小
+    public static int WIDTH = ResourceMgr.bulletD.getWidth(); // 子弹的宽度
+    public static int HEIGHT = ResourceMgr.bulletD.getHeight(); //子弹的高度
+
     private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向
+
     private boolean live = true; // 子弹是否有效
     private TankFrame tf = null;
-
 
     public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;

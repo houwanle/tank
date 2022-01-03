@@ -1,6 +1,7 @@
 package com.lele.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @author: lele
@@ -11,14 +12,25 @@ public class Tank {
 
     private int x, y; // 坦克的大小
     private Dir dir = Dir.DOWN; // 坦克的方向
-    private static final int SPEED = 5; // 坦克的速度
+    private static final int SPEED = 1; // 坦克的速度
 
     public static int WIDTH = ResourceMgr.tankD.getWidth(); // 坦克的宽度
     public static int HEIGHT = ResourceMgr.tankD.getHeight();// 坦克的高度
 
-    private boolean moving = false;  // 坦克是否在移动
+    private Random random = new Random();
+
+    private boolean moving = true;  // 坦克是否在移动
     private TankFrame tf = null;
     private boolean living = true;  //坦克是否活着
+    private Group group = Group.BAD; //敌方
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     public int getX() {
         return x;
@@ -52,10 +64,11 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -108,6 +121,10 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+        if (random.nextInt(10) > 8) {
+            this.fire();
+        }
     }
 
     /**
@@ -118,7 +135,7 @@ public class Tank {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
-        tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
     }
 
     /**

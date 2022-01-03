@@ -19,9 +19,11 @@ public class TankFrame extends Frame {
     static final int GAME_WIDTH = 800; //游戏窗口宽度
     static final int GAME_HEIGHT = 600; // 游戏窗口高度
 
-    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, this);
     List<Bullet> bullets = new ArrayList<>();
-    Bullet b = new Bullet(300, 300, Dir.DOWN, this);
+    List<Tank> tanks = new ArrayList<>();
+
+//    Bullet b = new Bullet(300, 300, Dir.DOWN, this);
 
     public TankFrame(){
         // 设置窗口大小
@@ -84,6 +86,12 @@ public class TankFrame extends Frame {
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
+
+        // 画坦克
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
+        }
+
 
     }
 

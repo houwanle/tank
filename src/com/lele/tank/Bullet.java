@@ -32,10 +32,21 @@ public class Bullet {
         if (!live) {
             tf.bullets.remove(this);
         }
-        Color c = g.getColor(); // 获取原来的颜色
-        g.setColor(Color.RED); // 设置子弹的颜色
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(c); // 设置为原来的颜色
+
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.bulletL, x, y, null); //画向左子弹图片
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.bulletU, x, y, null); //画向上子弹图片
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.bulletR, x, y, null); //画向右子弹图片
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.bulletD, x, y, null); //画向下子弹图片
+                break;
+        }
 
         move(); // 子弹移动
     }

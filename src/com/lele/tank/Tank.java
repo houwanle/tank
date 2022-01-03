@@ -17,8 +17,24 @@ public class Tank {
     public static int HEIGHT = ResourceMgr.tankD.getHeight();// 坦克的高度
 
     private boolean moving = false;  // 坦克是否在移动
-
     private TankFrame tf = null;
+    private boolean living = true;  //坦克是否活着
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -48,6 +64,9 @@ public class Tank {
      * @param g
      */
     public void paint(Graphics g) {
+        if (!living) {
+            tf.tanks.remove(this);
+        }
 
         switch (dir) {
             case LEFT:
@@ -100,5 +119,12 @@ public class Tank {
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
         tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+    }
+
+    /**
+     * 坦克被击中
+     */
+    public void die() {
+        this.living = false;
     }
 }

@@ -16,7 +16,7 @@ public class Bullet {
     private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向
 
-    private boolean live = true; // 子弹是否有效
+    private boolean living = true; // 子弹是否有效
     private TankFrame tf = null;
 
     public Bullet(int x, int y, Dir dir, TankFrame tf) {
@@ -31,7 +31,7 @@ public class Bullet {
      * @param g
      */
     public void paint(Graphics g) {
-        if (!live) {
+        if (!living) {
             tf.bullets.remove(this);
         }
 
@@ -74,8 +74,28 @@ public class Bullet {
 
         // 子弹飞出游戏窗口后，子弹无效
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
-            live = false;
+            living = false;
         }
 
+    }
+
+    /**
+     * 碰撞
+     * @param tank
+     */
+    public void collideWith(Tank tank) {
+        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rect1.intersects(rect2)) { // 如果两个方块相交
+            tank.die();
+            this.die();
+        }
+    }
+
+    /**
+     * 子弹击中坦克后爆炸
+     */
+    private void die() {
+        this.living = false;
     }
 }

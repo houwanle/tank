@@ -23,8 +23,13 @@ public class ImageTest {
     public void test() {
 
         try {
-            BufferedImage image = ImageIO.read(new File("F:\\temp-msb-gitlab\\tank-master\\tank\\src\\images\\bulletD.gif"));
+            BufferedImage image = ImageIO.read(
+                    new File("F:\\temp-msb-gitlab\\tank-master\\tank\\src\\images\\bulletD.gif"));
             assertNotNull(image);
+
+            BufferedImage image2 = ImageIO.read(
+                    ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            assertNotNull(image2);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,8 +22,7 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this); //初始化我方坦克
     List<Bullet> bullets = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
-
-//    Bullet b = new Bullet(300, 300, Dir.DOWN, this);
+    Explode e = new Explode(100, 100, this);
 
     public TankFrame(){
         // 设置窗口大小
@@ -98,6 +97,9 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
+
+        // 画爆炸
+        e.paint(g);
 
 
     }

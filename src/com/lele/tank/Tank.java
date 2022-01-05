@@ -12,10 +12,10 @@ public class Tank {
 
     private int x, y; // 坦克的大小
     private Dir dir = Dir.DOWN; // 坦克的方向
-    private static final int SPEED = 1; // 坦克的速度
+    private static final int SPEED = 2; // 坦克的速度
 
-    public static int WIDTH = ResourceMgr.tankD.getWidth(); // 坦克的宽度
-    public static int HEIGHT = ResourceMgr.tankD.getHeight();// 坦克的高度
+    public static int WIDTH = ResourceMgr.tankU.getWidth(); // 坦克的宽度
+    public static int HEIGHT = ResourceMgr.tankU.getHeight();// 坦克的高度
 
     private Random random = new Random();
 

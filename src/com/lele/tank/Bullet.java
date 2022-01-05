@@ -9,9 +9,9 @@ import java.awt.*;
  */
 public class Bullet {
 
-    private static final int SPEED = 10; // 子弹的速度
-    public static int WIDTH = ResourceMgr.bulletD.getWidth(); // 子弹的宽度
-    public static int HEIGHT = ResourceMgr.bulletD.getHeight(); //子弹的高度
+    private static final int SPEED = 6; // 子弹的速度
+    public static int WIDTH = ResourceMgr.bulletU.getWidth(); // 子弹的宽度
+    public static int HEIGHT = ResourceMgr.bulletU.getHeight(); //子弹的高度
 
     private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向

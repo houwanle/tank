@@ -38,4 +38,14 @@
 - 加入多辆敌军坦克
 - 让敌军坦克动起来
 - 加入爆炸
+  - 加入到list中
+  - 显示数量
 - 加入声音
+- 敌人坦克简单智能化
+  - 随机移动位置
+  - 随机发射子弹
+- 边界检测
+- 解决new Rectangle 问题
+- Code Review and Refactor
+- 配置文件
+- PropertyMgr的单例问题

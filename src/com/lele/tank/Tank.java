@@ -122,9 +122,22 @@ public class Tank {
                 break;
         }
 
-        if (random.nextInt(10) > 8) {
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
+
+        if (this.group == Group.BAD && random.nextInt(100) > 95) {
+            randomDir();
+        }
+
+    }
+
+    /**
+     * 随机方向
+     */
+    private void randomDir() {
+
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     /**

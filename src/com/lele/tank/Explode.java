@@ -14,7 +14,7 @@ public class Explode {
 
     private int x, y; // 位置
 
-    private boolean living = true; // 子弹是否有效
+//    private boolean living = true; // 子弹是否有效
     private TankFrame tf = null;
 
     private int step = 0;
@@ -35,7 +35,7 @@ public class Explode {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 
         if (step >= ResourceMgr.explodes.length) {
-            step = 0;
+            tf.explodes.remove(this);
         }
     }
 

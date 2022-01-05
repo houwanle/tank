@@ -105,6 +105,7 @@ public class Bullet {
         if (rect1.intersects(rect2)) { // 如果两个方块相交,坦克子弹都消失
             tank.die();
             this.die();
+            tf.explodes.add(new Explode(x, y, tf));
         }
     }
 

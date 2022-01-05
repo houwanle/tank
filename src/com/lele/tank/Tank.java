@@ -14,8 +14,8 @@ public class Tank {
     private Dir dir = Dir.DOWN; // 坦克的方向
     private static final int SPEED = 2; // 坦克的速度
 
-    public static int WIDTH = ResourceMgr.tankU.getWidth(); // 坦克的宽度
-    public static int HEIGHT = ResourceMgr.tankU.getHeight();// 坦克的高度
+    public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
+    public static int HEIGHT = ResourceMgr.goodTankU.getHeight();// 坦克的高度
 
     private Random random = new Random();
 
@@ -83,16 +83,20 @@ public class Tank {
 
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.tankL, x, y, null); //画向左坦克图片
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,
+                        x, y, null); //画向左坦克图片
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU, x, y, null); //画向上坦克图片
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU,
+                        x, y, null); //画向上坦克图片
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR, x, y, null); //画向右坦克图片
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR,
+                        x, y, null); //画向右坦克图片
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD, x, y, null); //画向下坦克图片
+                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD,
+                        x, y, null); //画向下坦克图片
                 break;
         }
 

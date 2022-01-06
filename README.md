@@ -45,7 +45,7 @@
   - 随机移动位置
   - 随机发射子弹
 - 边界检测
-- 解决new Rectangle 问题
+- 解决new Rectangle 问题（MileStone）
 - Code Review and Refactor
 - 配置文件
 - PropertyMgr的单例问题

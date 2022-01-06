@@ -13,6 +13,8 @@ public class Bullet {
     public static int WIDTH = ResourceMgr.bulletU.getWidth(); // 子弹的宽度
     public static int HEIGHT = ResourceMgr.bulletU.getHeight(); //子弹的高度
 
+    Rectangle rect = new Rectangle();
+
     private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向
 
@@ -26,6 +28,11 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public Group getGroup() {
@@ -82,6 +89,10 @@ public class Bullet {
                 break;
         }
 
+        // 更新 rect
+        rect.x = this.x;
+        rect.y = this.y;
+
         // 子弹飞出游戏窗口后，子弹无效
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
@@ -99,10 +110,10 @@ public class Bullet {
         }
 
         // todo:用一个rect来记录子弹的位置
-        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+//        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+//        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 
-        if (rect1.intersects(rect2)) { // 如果两个方块相交,坦克子弹都消失
+        if (rect.intersects(tank.rect)) { // 如果两个方块相交,坦克子弹都消失
             tank.die();
             this.die();
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;

@@ -17,6 +17,8 @@ public class Tank {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();// 坦克的高度
 
+    Rectangle rect = new Rectangle();
+
     private Random random = new Random();
 
     private boolean moving = true;  // 坦克是否在移动
@@ -70,6 +72,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     /**
@@ -135,6 +142,10 @@ public class Tank {
         }
 
         boundsCheck();
+
+        // 更新 rect
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     /**

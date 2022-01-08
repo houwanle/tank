@@ -18,6 +18,8 @@ public class Main {
             tf.tanks.add(new Tank(50 + i*80, 200, Dir.DOWN, Group.BAD, tf));
         }
 
+        new Thread(() -> new Audio("audio/war1.wav").loop()).start();
+
         while (true) {
             Thread.sleep(25);
             tf.repaint();

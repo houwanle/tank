@@ -47,5 +47,11 @@
 - 边界检测
 - 解决new Rectangle 问题（MileStone）
 - Code Review and Refactor
-- 配置文件
+- 配置文件  
+-------------------会有两个分支：设计模式（DesignPattern）、网络版（Network）----------------------
 - PropertyMgr的单例问题
+- 单例：PropertyMgr  ResourceMgr
+- 策略：Strategy
+  - Comparable
+  - Comparator
+  - tank.fire

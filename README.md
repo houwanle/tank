@@ -51,7 +51,10 @@
 -------------------会有两个分支：设计模式（DesignPattern）、网络版（Network）----------------------
 - PropertyMgr的单例问题
 - 单例：PropertyMgr  ResourceMgr
+  - 单例模式
+    - 只需要一个实例（比如各种Mgr、比如各种Factory）
 - 策略：Strategy
   - Comparable
   - Comparator
-  - tank.fire
+  - 策略模式应用到Tank.fire
+  - 通过配置文件配置不同的开火策略，实现敌我双方的不同开火策略

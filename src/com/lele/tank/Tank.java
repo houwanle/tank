@@ -10,8 +10,8 @@ import java.util.Random;
  */
 public class Tank {
 
-    private int x, y; // 坦克的大小
-    private Dir dir = Dir.DOWN; // 坦克的方向
+    int x, y; // 坦克的大小
+    Dir dir = Dir.DOWN; // 坦克的方向
     private static final int SPEED = 2; // 坦克的速度
 
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
@@ -22,9 +22,11 @@ public class Tank {
     private Random random = new Random();
 
     private boolean moving = true;  // 坦克是否在移动
-    private TankFrame tf = null;
+    TankFrame tf = null;
     private boolean living = true;  //坦克是否活着
-    private Group group = Group.BAD; //敌方
+    Group group = Group.BAD; //敌方
+
+    FireStrategy fs;
 
     public Group getGroup() {
         return group;
@@ -77,6 +79,30 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        if (group == Group.GOOD) {
+            String goodFSName = (String)PropertyMgr.get("goodFS");
+            try {
+                fs = (FireStrategy)Class.forName(goodFSName).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            String badFS = (String)PropertyMgr.get("badFS");
+            try {
+                fs = (FireStrategy)Class.forName(badFS).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -181,11 +207,7 @@ public class Tank {
      * 发射子弹
      */
     public void fire() {
-        // 让子弹从坦克中心发射
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-
-        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
+        fs.fire(this);
     }
 
     /**

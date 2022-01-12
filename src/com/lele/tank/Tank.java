@@ -1,5 +1,7 @@
 package com.lele.tank;
 
+import com.lele.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -8,7 +10,7 @@ import java.util.Random;
  * @date: 2022/1/2 12:10
  * @description: 坦克类
  */
-public class Tank {
+public class Tank extends BaseTank {
 
     int x, y; // 坦克的大小
     Dir dir = Dir.DOWN; // 坦克的方向
@@ -17,7 +19,7 @@ public class Tank {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();// 坦克的高度
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private Random random = new Random();
 

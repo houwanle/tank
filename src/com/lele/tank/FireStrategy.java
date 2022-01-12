@@ -1,5 +1,7 @@
 package com.lele.tank;
 
+import com.lele.tank.abstractfactory.BaseTank;
+
 /**
  * @author: lele
  * @date: 2022/1/9 10:26

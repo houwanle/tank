@@ -1,6 +1,6 @@
-package com.lele.tank;
+package com.lele.tank.abstractfactory;
 
-import com.lele.tank.abstractfactory.BaseBullet;
+import com.lele.tank.*;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ import java.awt.*;
  * @date: 2022/1/2 15:12
  * @description: 子弹类
  */
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
 
     private static final int SPEED = 6; // 子弹的速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(); // 子弹的宽度
@@ -24,7 +24,7 @@ public class Bullet extends BaseBullet {
     private TankFrame tf = null;
     private Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -56,20 +56,26 @@ public class Bullet extends BaseBullet {
             tf.bullets.remove(this);
         }
 
-        switch (dir) {
-            case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null); //画向左子弹图片
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null); //画向上子弹图片
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null); //画向右子弹图片
-                break;
-            case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null); //画向下子弹图片
-                break;
-        }
+//        switch (dir) {
+//            case LEFT:
+//                g.drawImage(ResourceMgr.bulletL, x, y, null); //画向左子弹图片
+//                break;
+//            case UP:
+//                g.drawImage(ResourceMgr.bulletU, x, y, null); //画向上子弹图片
+//                break;
+//            case RIGHT:
+//                g.drawImage(ResourceMgr.bulletR, x, y, null); //画向右子弹图片
+//                break;
+//            case DOWN:
+//                g.drawImage(ResourceMgr.bulletD, x, y, null); //画向下子弹图片
+//                break;
+
+//        }
+
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillRect(x, y, 20, 20);
+        g.setColor(c);
 
         move(); // 子弹移动
     }

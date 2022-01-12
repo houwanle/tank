@@ -1,6 +1,6 @@
-package com.lele.tank;
+package com.lele.tank.abstractfactory;
 
-import com.lele.tank.abstractfactory.BaseTank;
+import com.lele.tank.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -10,7 +10,7 @@ import java.util.Random;
  * @date: 2022/1/2 12:10
  * @description: 坦克类
  */
-public class Tank extends BaseTank {
+public class RectTank extends BaseTank {
 
     int x, y; // 坦克的大小
     Dir dir = Dir.DOWN; // 坦克的方向
@@ -19,11 +19,14 @@ public class Tank extends BaseTank {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();// 坦克的高度
 
+    public Rectangle rect = new Rectangle();
+
     private Random random = new Random();
 
     private boolean moving = true;  // 坦克是否在移动
     TankFrame tf = null;
     private boolean living = true;  //坦克是否活着
+    Group group = Group.BAD; //敌方
 
     FireStrategy fs;
 
@@ -67,7 +70,7 @@ public class Tank extends BaseTank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -113,24 +116,29 @@ public class Tank extends BaseTank {
             tf.tanks.remove(this);
         }
 
-        switch (dir) {
-            case LEFT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,
-                        x, y, null); //画向左坦克图片
-                break;
-            case UP:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU,
-                        x, y, null); //画向上坦克图片
-                break;
-            case RIGHT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR,
-                        x, y, null); //画向右坦克图片
-                break;
-            case DOWN:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD,
-                        x, y, null); //画向下坦克图片
-                break;
-        }
+//        switch (dir) {
+//            case LEFT:
+//                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL,
+//                        x, y, null); //画向左坦克图片
+//                break;
+//            case UP:
+//                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU,
+//                        x, y, null); //画向上坦克图片
+//                break;
+//            case RIGHT:
+//                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR,
+//                        x, y, null); //画向右坦克图片
+//                break;
+//            case DOWN:
+//                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD,
+//                        x, y, null); //画向下坦克图片
+//                break;
+//        }
+
+        Color c = g.getColor();
+        g.setColor(group == Group.GOOD ? Color.RED: Color.BLUE);
+        g.fillRect(x, y, 40, 40);
+        g.setColor(c);
 
         move();
 
@@ -185,12 +193,12 @@ public class Tank extends BaseTank {
             y = 28;
         }
 
-        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) {
-            x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
+        if (this.x > TankFrame.GAME_WIDTH - RectTank.WIDTH - 2) {
+            x = TankFrame.GAME_WIDTH - RectTank.WIDTH - 2;
         }
 
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) {
-            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2) {
+            y = TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2;
         }
     }
 
@@ -209,8 +217,8 @@ public class Tank extends BaseTank {
 //        fs.fire(this);
 
         // 让子弹从坦克中心发射
-        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+        int bX = this.x + RectTank.WIDTH/2 - Bullet.WIDTH/2;
+        int bY = this.y + RectTank.HEIGHT/2 - Bullet.HEIGHT/2;
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {

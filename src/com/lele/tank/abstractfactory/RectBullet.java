@@ -114,7 +114,7 @@ public class RectBullet extends BaseBullet {
      * 碰撞
      * @param tank
      */
-    public void collideWith(Tank tank) {
+    public void collideWith(BaseTank tank) {
         if (this.group == tank.getGroup()) {//队友不能互相伤害
             return;
         }

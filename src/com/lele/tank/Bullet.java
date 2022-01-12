@@ -1,6 +1,7 @@
 package com.lele.tank;
 
 import com.lele.tank.abstractfactory.BaseBullet;
+import com.lele.tank.abstractfactory.BaseTank;
 
 import java.awt.*;
 
@@ -108,14 +109,10 @@ public class Bullet extends BaseBullet {
      * 碰撞
      * @param tank
      */
-    public void collideWith(Tank tank) {
+    public void collideWith(BaseTank tank) {
         if (this.group == tank.getGroup()) {//队友不能互相伤害
             return;
         }
-
-        // todo:用一个rect来记录子弹的位置
-//        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-//        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 
         if (rect.intersects(tank.rect)) { // 如果两个方块相交,坦克子弹都消失
             tank.die();

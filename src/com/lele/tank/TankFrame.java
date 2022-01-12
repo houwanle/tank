@@ -26,7 +26,7 @@ public class TankFrame extends Frame {
     public List<BaseTank> tanks = new ArrayList<>();
     public List<BaseExplode> explodes = new ArrayList<>();
 
-    public GameFactory gf = new RectFactory();
+    public GameFactory gf = new DefaultFactory();
 
     public TankFrame(){
         // 设置窗口大小

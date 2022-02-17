@@ -16,14 +16,10 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
+    GameModel gm = new GameModel();
+
     static final int GAME_WIDTH = 800; //游戏窗口宽度
     static final int GAME_HEIGHT = 600; // 游戏窗口高度
-
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this); //初始化我方坦克
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
-//    Explode e = new Explode(100, 100, this);
 
     public TankFrame(){
         // 设置窗口大小
@@ -71,42 +67,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.WHITE);
-        g.drawString("子弹的数量" + bullets.size(), 10, 60);
-        g.drawString("敌人的数量" + tanks.size(), 10, 80);
-        g.drawString("爆炸的数量" + explodes.size(), 10, 100);
-        g.setColor(c);
-
-        // 画坦克
-        myTank.paint(g);
-
-        // 画子弹
-//        for (Bullet b : bullets) { //用此种方法画子弹，在删除子弹的时候会报java.util.ConcurrentModificationException错
-//            b.paint(g);
-//        }
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).paint(g);
-        }
-
-        // 画坦克
-        for (int i = 0; i < tanks.size(); i++) {
-            tanks.get(i).paint(g);
-        }
-
-        // 画爆炸
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-
-        // 碰撞检测
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-        }
-
-
+        gm.paint(g);
 
     }
 
@@ -171,7 +132,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_CONTROL: // Ctrl键
-                    myTank.fire(); // 打出一颗子弹
+                    gm.getMainTank().fire(); // 打出一颗子弹
                     break;
                 default:
                     break;
@@ -180,13 +141,15 @@ public class TankFrame extends Frame {
             // 设置主战坦克的方向
             setMainTankDir();
 
-            new Thread(()->new Audio("audio/tank_move.wav").play()).start();
+//            new Thread(()->new Audio("audio/tank_move.wav").play()).start();
         }
 
         /**
          * 设置主战坦克的方向
          */
         private void setMainTankDir() {
+            Tank myTank = gm.getMainTank();
+
             if (!bL && !bU && !bR && !bD) {
                 myTank.setMoving(false);
             } else {

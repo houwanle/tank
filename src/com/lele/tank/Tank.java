@@ -22,11 +22,12 @@ public class Tank {
     private Random random = new Random();
 
     private boolean moving = true;  // 坦克是否在移动
-    TankFrame tf = null;
+
     private boolean living = true;  //坦克是否活着
     Group group = Group.BAD; //敌方
 
     FireStrategy fs;
+    GameModel gm;
 
     public Group getGroup() {
         return group;
@@ -68,12 +69,12 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -111,7 +112,7 @@ public class Tank {
      */
     public void paint(Graphics g) {
         if (!living) {
-            tf.tanks.remove(this);
+            gm.tanks.remove(this);
         }
 
         switch (dir) {

@@ -7,7 +7,7 @@ import java.awt.*;
  * @date: 2022/1/2 15:12
  * @description: 子弹类
  */
-public class Bullet {
+public class Bullet extends GameObject {
 
     private static final int SPEED = 6; // 子弹的速度
     public static int WIDTH = ResourceMgr.bulletU.getWidth(); // 子弹的宽度
@@ -34,7 +34,7 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.bullets.add(this);
+        gm.add(this);
     }
 
     public Group getGroup() {
@@ -51,7 +51,7 @@ public class Bullet {
      */
     public void paint(Graphics g) {
         if (!living) {
-            gm.bullets.remove(this);
+            gm.remove(this);
         }
 
         switch (dir) {
@@ -106,9 +106,9 @@ public class Bullet {
      * 碰撞
      * @param tank
      */
-    public void collideWith(Tank tank) {
+    public boolean collideWith(Tank tank) {
         if (this.group == tank.getGroup()) {//队友不能互相伤害
-            return;
+            return false;
         }
 
         // todo:用一个rect来记录子弹的位置
@@ -120,8 +120,10 @@ public class Bullet {
             this.die();
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gm.explodes.add(new Explode(eX, eY, gm));
+            gm.add(new Explode(eX, eY, gm));
+            return true;
         }
+        return false;
     }
 
     /**

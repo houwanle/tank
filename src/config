@@ -6,5 +6,8 @@ gameWidth=1080
 gameHeight=720
 
 #fireStrategy
-goodFS=com.lele.tank.FourDirFireStrategy
-badFS=com.lele.tank.DefaultFireStrategy
+goodFS=com.lele.tank.strategy.FourDirFireStrategy
+badFS=com.lele.tank.strategy.DefaultFireStrategy
+
+#colliders
+colliders=com.lele.tank.cor.BulletTankCollider,com.lele.tank.cor.TankTankCollider

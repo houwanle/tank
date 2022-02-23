@@ -7,7 +7,7 @@ import java.awt.*;
  * @date: 2022/1/2 15:12
  * @description: 爆炸类
  */
-public class Explode {
+public class Explode extends GameObject {
 
     public static int WIDTH = ResourceMgr.explodes[0].getWidth(); // 爆炸图片的宽度
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight(); //爆炸图片的高度
@@ -35,7 +35,7 @@ public class Explode {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 
         if (step >= ResourceMgr.explodes.length) {
-            gm.explodes.remove(this);
+            gm.remove(this);
         }
     }
 

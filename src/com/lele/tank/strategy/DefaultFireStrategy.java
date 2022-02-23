@@ -1,4 +1,9 @@
-package com.lele.tank;
+package com.lele.tank.strategy;
+
+import com.lele.tank.Audio;
+import com.lele.tank.Bullet;
+import com.lele.tank.Group;
+import com.lele.tank.Tank;
 
 /**
  * @author: lele

@@ -1,4 +1,6 @@
-package com.lele.tank;
+package com.lele.tank.strategy;
+
+import com.lele.tank.*;
 
 /**
  * @author: lele

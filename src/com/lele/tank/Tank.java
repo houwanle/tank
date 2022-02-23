@@ -1,5 +1,7 @@
 package com.lele.tank;
 
+import com.lele.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -8,10 +10,11 @@ import java.util.Random;
  * @date: 2022/1/2 12:10
  * @description: 坦克类
  */
-public class Tank {
+public class Tank extends GameObject {
 
-    int x, y; // 坦克的大小
-    Dir dir = Dir.DOWN; // 坦克的方向
+    public int x, y; // 坦克的大小
+    // int oldX, oldY;
+    public Dir dir = Dir.DOWN; // 坦克的方向
     private static final int SPEED = 2; // 坦克的速度
 
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
@@ -24,10 +27,10 @@ public class Tank {
     private boolean moving = true;  // 坦克是否在移动
 
     private boolean living = true;  //坦克是否活着
-    Group group = Group.BAD; //敌方
+    public Group group = Group.BAD; //敌方
 
     FireStrategy fs;
-    GameModel gm;
+    public GameModel gm;
 
     public Group getGroup() {
         return group;
@@ -67,6 +70,10 @@ public class Tank {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+
+    public Rectangle getRect() {
+        return rect;
     }
 
     public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
@@ -112,7 +119,7 @@ public class Tank {
      */
     public void paint(Graphics g) {
         if (!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
         }
 
         switch (dir) {
@@ -142,6 +149,8 @@ public class Tank {
      * 坦克移动
      */
     private void move() {
+        // oldX = x;
+        // oldY = y;
         if (!moving) {
             return;
         }
@@ -216,5 +225,12 @@ public class Tank {
      */
     public void die() {
         this.living = false;
+    }
+
+    /**
+     * 坦克停止
+     */
+    public void stop() {
+        moving = false;
     }
 }

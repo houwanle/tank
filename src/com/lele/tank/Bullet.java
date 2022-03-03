@@ -13,28 +13,27 @@ public class Bullet extends GameObject {
     public static int WIDTH = ResourceMgr.bulletU.getWidth(); // 子弹的宽度
     public static int HEIGHT = ResourceMgr.bulletU.getHeight(); //子弹的高度
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向
 
     private boolean living = true; // 子弹是否有效
-    GameModel gm = null;
-    private Group group = Group.BAD;
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Group group = Group.BAD;
+
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.add(this);
+        GameModel.getInstance().add(this);
     }
 
     public Group getGroup() {
@@ -51,7 +50,7 @@ public class Bullet extends GameObject {
      */
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         switch (dir) {
@@ -103,33 +102,9 @@ public class Bullet extends GameObject {
     }
 
     /**
-     * 碰撞
-     * @param tank
-     */
-    public boolean collideWith(Tank tank) {
-        if (this.group == tank.getGroup()) {//队友不能互相伤害
-            return false;
-        }
-
-        // todo:用一个rect来记录子弹的位置
-//        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-//        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-
-        if (rect.intersects(tank.rect)) { // 如果两个方块相交,坦克子弹都消失
-            tank.die();
-            this.die();
-            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-            gm.add(new Explode(eX, eY, gm));
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * 子弹击中坦克后爆炸
      */
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }

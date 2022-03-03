@@ -1,5 +1,6 @@
 package com.lele.tank;
 
+import com.lele.tank.strategy.DefaultFireStrategy;
 import com.lele.tank.strategy.FireStrategy;
 
 import java.awt.*;
@@ -13,14 +14,14 @@ import java.util.Random;
 public class Tank extends GameObject {
 
     public int x, y; // 坦克的大小
-    // int oldX, oldY;
+     int oldX, oldY;
     public Dir dir = Dir.DOWN; // 坦克的方向
     private static final int SPEED = 2; // 坦克的速度
 
     public static int WIDTH = ResourceMgr.goodTankU.getWidth(); // 坦克的宽度
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();// 坦克的高度
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private Random random = new Random();
 
@@ -30,7 +31,6 @@ public class Tank extends GameObject {
     public Group group = Group.BAD; //敌方
 
     FireStrategy fs;
-    public GameModel gm;
 
     public Group getGroup() {
         return group;
@@ -76,12 +76,11 @@ public class Tank extends GameObject {
         return rect;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -100,17 +99,20 @@ public class Tank extends GameObject {
                 e.printStackTrace();
             }
         } else {
-            String badFS = (String)PropertyMgr.get("badFS");
-            try {
-                fs = (FireStrategy)Class.forName(badFS).newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+//            String badFS = (String)PropertyMgr.get("badFS");
+//            try {
+//                fs = (FireStrategy)Class.forName(badFS).newInstance();
+//            } catch (InstantiationException e) {
+//                e.printStackTrace();
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+            fs = new DefaultFireStrategy();
         }
+
+        GameModel.getInstance().add(this);
     }
 
     /**
@@ -119,7 +121,7 @@ public class Tank extends GameObject {
      */
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
 
         switch (dir) {
@@ -142,15 +144,21 @@ public class Tank extends GameObject {
         }
 
         move();
+    }
 
+    public void back() {
+        x = oldX;
+        y = oldY;
     }
 
     /**
      * 坦克移动
      */
     private void move() {
-        // oldX = x;
-        // oldY = y;
+        // 记录移动之前的位置
+        oldX = x;
+        oldY = y;
+
         if (!moving) {
             return;
         }

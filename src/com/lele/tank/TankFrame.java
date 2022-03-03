@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    GameModel gm = new GameModel();
+    GameModel gm = GameModel.getInstance();
 
     static final int GAME_WIDTH = 800; //游戏窗口宽度
     static final int GAME_HEIGHT = 600; // 游戏窗口高度

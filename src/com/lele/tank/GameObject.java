@@ -8,7 +8,11 @@ import java.awt.*;
  * @description: 游戏对象  名词用抽象类，形容词用接口
  */
 public abstract class GameObject {
-    int x, y;
+    public int x, y;
 
     public abstract void paint(Graphics g);
+
+    public abstract int getWidth();
+
+    public abstract int getHeight();
 }

@@ -12,7 +12,7 @@ public class Explode extends GameObject {
     public static int WIDTH = ResourceMgr.explodes[0].getWidth(); // 爆炸图片的宽度
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight(); //爆炸图片的高度
 
-    private int x, y; // 位置
+//    private int x, y; // 位置
 
 //    private boolean living = true; // 子弹是否有效
 
@@ -36,6 +36,16 @@ public class Explode extends GameObject {
         if (step >= ResourceMgr.explodes.length) {
             GameModel.getInstance().remove(this);
         }
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
 }

@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Tank extends GameObject {
 
-    public int x, y; // 坦克的大小
+//    public int x, y; // 坦克的大小
      int oldX, oldY;
     public Dir dir = Dir.DOWN; // 坦克的方向
     private static final int SPEED = 2; // 坦克的速度
@@ -240,5 +240,15 @@ public class Tank extends GameObject {
      */
     public void stop() {
         moving = false;
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 }

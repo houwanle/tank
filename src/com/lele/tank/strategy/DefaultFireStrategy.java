@@ -1,9 +1,8 @@
 package com.lele.tank.strategy;
 
-import com.lele.tank.Audio;
-import com.lele.tank.Bullet;
-import com.lele.tank.Group;
-import com.lele.tank.Tank;
+import com.lele.tank.*;
+import com.lele.tank.decorator.RectDecorator;
+import com.lele.tank.decorator.TailDecorator;
 
 /**
  * @author: lele
@@ -18,7 +17,10 @@ public class DefaultFireStrategy implements FireStrategy {
         int bX = t.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = t.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
-        new Bullet(bX, bY, t.dir, t.group);
+        GameModel.getInstance().add(
+                new RectDecorator(
+                        new TailDecorator(
+                        new Bullet(bX, bY, t.dir, t.group))));
 
         if (t.group == Group.GOOD) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();

@@ -15,7 +15,7 @@ public class Bullet extends GameObject {
 
     public Rectangle rect = new Rectangle();
 
-    private int x, y; // 子弹的位置
+//    private int x, y; // 子弹的位置
     private Dir dir; // 子弹的方向
 
     private boolean living = true; // 子弹是否有效
@@ -69,6 +69,16 @@ public class Bullet extends GameObject {
         }
 
         move(); // 子弹移动
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     /**

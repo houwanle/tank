@@ -132,7 +132,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_CONTROL: // Ctrl键
-                    gm.getMainTank().fire(); // 打出一颗子弹
+                    gm.getMainTank().handleFireKey(); // 打出一颗子弹
                     break;
                 default:
                     break;

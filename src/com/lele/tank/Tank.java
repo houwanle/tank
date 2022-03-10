@@ -1,9 +1,16 @@
 package com.lele.tank;
 
+import com.lele.tank.observer.TankFireEvent;
+import com.lele.tank.observer.TankFireHandler;
+import com.lele.tank.observer.TankFireObserver;
 import com.lele.tank.strategy.DefaultFireStrategy;
 import com.lele.tank.strategy.FireStrategy;
 
-import java.awt.*;
+import java.awt.Rectangle;
+import java.awt.Graphics;
+import java.awt.Graphics;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -250,5 +257,13 @@ public class Tank extends GameObject {
     @Override
     public int getHeight() {
         return HEIGHT;
+    }
+
+    private List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
+    public void handleFireKey() {
+        TankFireEvent event = new TankFireEvent(this);
+        for (TankFireObserver o : fireObservers) {
+            o.actionOnFire(event);
+        }
     }
 }

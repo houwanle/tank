@@ -102,6 +102,13 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN: // 向下按键
                     bD = true;
                     break;
+                case KeyEvent.VK_S: // S键
+                    gm.save();
+                    break;
+                case KeyEvent.VK_L: // L键
+                    gm.load();
+                    break;
+
                 default:
                     break;
             }

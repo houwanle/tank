@@ -2,8 +2,10 @@
 > 坦克大战
 
 ### 1.游戏说明
+0. 启动游戏，先启动ServerFrame，然后可以启动多个Main，开始游戏；
 1. 键盘上下左右控制坦克的移动
 2. Ctrl发射子弹
+
 
 ### 2.开发环境
 - JDK1.8
@@ -55,3 +57,4 @@
   - Comparable
   - Comparator
   - tank.fire
+  
